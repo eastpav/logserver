@@ -1,0 +1,288 @@
+State 0:
+          sentence ::= * expr
+      (1) sentence ::= *
+          expr ::= * relation_test
+          expr ::= * logical_test
+          logical_test ::= * expr TEST_AND expr
+          logical_test ::= * expr TEST_OR expr
+          logical_test ::= * entity
+          entity ::= * FIELD
+          entity ::= * STRING
+          entity ::= * UNPARSED
+          entity ::= * INTEGER
+          relation_test ::= * entity rel_op2 entity
+          relation_test ::= * entity rel_op2 relation_test
+          expr ::= * LPAREN expr RPAREN
+
+                             $ reduce 1
+                         FIELD shift  21
+                        STRING shift  20
+                      UNPARSED shift  19
+                       INTEGER shift  18
+                        LPAREN shift  1
+                      sentence accept
+                          expr shift  8
+                        entity shift  6
+                 relation_test shift  24
+                  logical_test shift  23
+
+State 1:
+          expr ::= * relation_test
+          expr ::= * logical_test
+          logical_test ::= * expr TEST_AND expr
+          logical_test ::= * expr TEST_OR expr
+          logical_test ::= * entity
+          entity ::= * FIELD
+          entity ::= * STRING
+          entity ::= * UNPARSED
+          entity ::= * INTEGER
+          relation_test ::= * entity rel_op2 entity
+          relation_test ::= * entity rel_op2 relation_test
+          expr ::= * LPAREN expr RPAREN
+          expr ::= LPAREN * expr RPAREN
+
+                         FIELD shift  21
+                        STRING shift  20
+                      UNPARSED shift  19
+                       INTEGER shift  18
+                        LPAREN shift  1
+                          expr shift  7
+                        entity shift  6
+                 relation_test shift  24
+                  logical_test shift  23
+
+State 2:
+          expr ::= * relation_test
+          expr ::= * logical_test
+          logical_test ::= * expr TEST_AND expr
+          logical_test ::= * expr TEST_OR expr
+          logical_test ::= expr TEST_OR * expr
+          logical_test ::= * entity
+          entity ::= * FIELD
+          entity ::= * STRING
+          entity ::= * UNPARSED
+          entity ::= * INTEGER
+          relation_test ::= * entity rel_op2 entity
+          relation_test ::= * entity rel_op2 relation_test
+          expr ::= * LPAREN expr RPAREN
+
+                         FIELD shift  21
+                        STRING shift  20
+                      UNPARSED shift  19
+                       INTEGER shift  18
+                        LPAREN shift  1
+                          expr shift  22
+                        entity shift  6
+                 relation_test shift  24
+                  logical_test shift  23
+
+State 3:
+          expr ::= * relation_test
+          expr ::= * logical_test
+          logical_test ::= * expr TEST_AND expr
+          logical_test ::= expr TEST_AND * expr
+          logical_test ::= * expr TEST_OR expr
+          logical_test ::= * entity
+          entity ::= * FIELD
+          entity ::= * STRING
+          entity ::= * UNPARSED
+          entity ::= * INTEGER
+          relation_test ::= * entity rel_op2 entity
+          relation_test ::= * entity rel_op2 relation_test
+          expr ::= * LPAREN expr RPAREN
+
+                         FIELD shift  21
+                        STRING shift  20
+                      UNPARSED shift  19
+                       INTEGER shift  18
+                        LPAREN shift  1
+                          expr shift  9
+                        entity shift  6
+                 relation_test shift  24
+                  logical_test shift  23
+
+State 4:
+          entity ::= * FIELD
+          entity ::= * STRING
+          entity ::= * UNPARSED
+          entity ::= * INTEGER
+          relation_test ::= * entity rel_op2 entity
+          relation_test ::= entity rel_op2 * entity
+          relation_test ::= * entity rel_op2 relation_test
+          relation_test ::= entity rel_op2 * relation_test
+
+                         FIELD shift  21
+                        STRING shift  20
+                      UNPARSED shift  19
+                       INTEGER shift  18
+                        entity shift  5
+                 relation_test shift  11
+
+State 5:
+          relation_test ::= entity * rel_op2 entity
+     (11) relation_test ::= entity rel_op2 entity *
+          relation_test ::= entity * rel_op2 relation_test
+          rel_op2 ::= * TEST_EQ
+          rel_op2 ::= * TEST_NE
+          rel_op2 ::= * TEST_GT
+          rel_op2 ::= * TEST_GE
+          rel_op2 ::= * TEST_LT
+          rel_op2 ::= * TEST_LE
+
+                       TEST_EQ shift  17
+                       TEST_NE shift  16
+                       TEST_LT shift  13
+                       TEST_LE shift  12
+                       TEST_GT shift  15
+                       TEST_GE shift  14
+                       rel_op2 shift  4
+                     {default} reduce 11
+
+State 6:
+      (6) logical_test ::= entity *
+          relation_test ::= entity * rel_op2 entity
+          relation_test ::= entity * rel_op2 relation_test
+          rel_op2 ::= * TEST_EQ
+          rel_op2 ::= * TEST_NE
+          rel_op2 ::= * TEST_GT
+          rel_op2 ::= * TEST_GE
+          rel_op2 ::= * TEST_LT
+          rel_op2 ::= * TEST_LE
+
+                       TEST_EQ shift  17
+                       TEST_NE shift  16
+                       TEST_LT shift  13
+                       TEST_LE shift  12
+                       TEST_GT shift  15
+                       TEST_GE shift  14
+                       rel_op2 shift  4
+                     {default} reduce 6
+
+State 7:
+          logical_test ::= expr * TEST_AND expr
+          logical_test ::= expr * TEST_OR expr
+          expr ::= LPAREN expr * RPAREN
+
+                      TEST_AND shift  3
+                       TEST_OR shift  2
+                        RPAREN shift  10
+
+State 8:
+      (0) sentence ::= expr *
+          logical_test ::= expr * TEST_AND expr
+          logical_test ::= expr * TEST_OR expr
+
+                             $ reduce 0
+                      TEST_AND shift  3
+                       TEST_OR shift  2
+
+State 9:
+          logical_test ::= expr * TEST_AND expr
+      (4) logical_test ::= expr TEST_AND expr *
+          logical_test ::= expr * TEST_OR expr
+
+                       TEST_OR shift  2
+                     {default} reduce 4
+
+State 10:
+     (19) expr ::= LPAREN expr RPAREN *
+
+                     {default} reduce 19
+
+State 11:
+     (12) relation_test ::= entity rel_op2 relation_test *
+
+                     {default} reduce 12
+
+State 12:
+     (18) rel_op2 ::= TEST_LE *
+
+                     {default} reduce 18
+
+State 13:
+     (17) rel_op2 ::= TEST_LT *
+
+                     {default} reduce 17
+
+State 14:
+     (16) rel_op2 ::= TEST_GE *
+
+                     {default} reduce 16
+
+State 15:
+     (15) rel_op2 ::= TEST_GT *
+
+                     {default} reduce 15
+
+State 16:
+     (14) rel_op2 ::= TEST_NE *
+
+                     {default} reduce 14
+
+State 17:
+     (13) rel_op2 ::= TEST_EQ *
+
+                     {default} reduce 13
+
+State 18:
+     (10) entity ::= INTEGER *
+
+                     {default} reduce 10
+
+State 19:
+      (9) entity ::= UNPARSED *
+
+                     {default} reduce 9
+
+State 20:
+      (8) entity ::= STRING *
+
+                     {default} reduce 8
+
+State 21:
+      (7) entity ::= FIELD *
+
+                     {default} reduce 7
+
+State 22:
+          logical_test ::= expr * TEST_AND expr
+          logical_test ::= expr * TEST_OR expr
+      (5) logical_test ::= expr TEST_OR expr *
+
+                     {default} reduce 5
+
+State 23:
+      (3) expr ::= logical_test *
+
+                     {default} reduce 3
+
+State 24:
+      (2) expr ::= relation_test *
+
+                     {default} reduce 2
+
+----------------------------------------------------
+Symbols:
+    0: $:
+    1: TEST_AND
+    2: TEST_OR
+    3: TEST_EQ
+    4: TEST_NE
+    5: TEST_LT
+    6: TEST_LE
+    7: TEST_GT
+    8: TEST_GE
+    9: FIELD
+   10: STRING
+   11: UNPARSED
+   12: INTEGER
+   13: LPAREN
+   14: RPAREN
+   15: error:
+   16: sentence: <lambda> FIELD STRING UNPARSED INTEGER LPAREN
+   17: expr: FIELD STRING UNPARSED INTEGER LPAREN
+   18: entity: FIELD STRING UNPARSED INTEGER
+   19: relation_test: FIELD STRING UNPARSED INTEGER
+   20: logical_test: FIELD STRING UNPARSED INTEGER LPAREN
+   21: rel_op2: TEST_EQ TEST_NE TEST_LT TEST_LE TEST_GT TEST_GE
+   22: range:
