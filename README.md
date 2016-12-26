@@ -14,7 +14,7 @@ logserver依赖glib库，编译之前安装最新版本的glib即可([https://de
 
 ## 使用
 logserver:作为daemon运行。
-log：删除main的代码后，包含在需输出日志的项目代码中。然后在项目中设置环境变量LIBLOGFAF_SERVER及LIBLOGFAF_PORT指定syslogd的host及port, port默认为514.
+log：删除main的代码后，包含在需输出日志的项目代码中。然后在项目代码执行前设置环境变量LIBLOGFAF_SERVER及LIBLOGFAF_PORT指定syslogd的host及port, port默认为514。
 lowatch：作为应用运行。
 
 ## 示例

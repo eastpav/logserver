@@ -263,10 +263,6 @@ int main(void)
     int idx = 0;
     printf("start\n");
 
-    /* 设置环境变量，用于指定syslogd的host及port, port默认为514 */
-    setenv("LIBLOGFAF_SERVER", "192.168.0.102", 1);
-    setenv("LIBLOGFAF_PORT", "514", 1);
-
     //_liblogfaf_init(); //called as constructor attribute
     while(iter++ < 100) {
         //syslog(2,"testlog:%d", iter);
