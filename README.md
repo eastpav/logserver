@@ -9,6 +9,7 @@ log在这里只是一个示例，模拟日志的产生。
 
 
 ## 编译和安装
+logserver依赖glib库，编译之前安装最新版本的glib即可([https://developer.gnome.org/glib/](https://developer.gnome.org/glib/ "https://developer.gnome.org/glib/"))。
 在当前目录执行make，即可生成syslogd、log和logwatch。
 
 ## 使用
