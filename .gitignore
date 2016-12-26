@@ -9,7 +9,6 @@ config.log
 .deps/
 .acaux/
 Makefile.in
-Makefile
 *.o
 *.a
 *.lo
