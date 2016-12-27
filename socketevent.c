@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <errno.h>
+#include <netdb.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -64,14 +65,22 @@ int creatTcpClient(void)
 
 int socketConnect(int sock, char* host, int port)
 {
+    struct hostent* hostentp = NULL;
     struct sockaddr_in saddr;
+    char str[32];
+
+    if(host == NULL) return OP_ERROR;
+
+    hostentp = gethostbyname(host);
+    if(hostentp == NULL) return OP_ERROR;
+    
+    inet_ntop(hostentp->h_addrtype, hostentp->h_addr, str, sizeof(str));
 
     saddr.sin_family = AF_INET;
-    saddr.sin_addr.s_addr = inet_addr(host);
+    saddr.sin_addr.s_addr = inet_addr(str);
     saddr.sin_port = htons(port);
 
     if(connect(sock, (struct sockaddr*)&saddr, sizeof(struct sockaddr)) != 0) {
-        logErr("socket connect failed\n"); 
         return OP_ERROR;
     }
 

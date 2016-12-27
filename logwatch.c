@@ -13,7 +13,7 @@
 #define PATCHLEVEL "00"
 
 char* g_confFile = NULL;
-char* g_hostAddr = "192.168.0.102";
+char* g_hostAddr = "localhost";
 char* g_patternExp = "all"; /* receive all log line, by default */
 int g_hostPort = 1234;
 int g_debugOn = 0;
@@ -75,7 +75,8 @@ int main(int argc, char** argv)
     }
 
     if(socketConnect(sock, g_hostAddr, g_hostPort) != OP_OK) {
-        printf("socket connect to %s:%d failed\n", g_hostAddr, g_hostPort);
+        perror("connect");
+        logErr("socket connect to %s:%d failed\n", g_hostAddr, g_hostPort);
         close(sock);
         return -1;
     }
